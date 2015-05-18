@@ -24,7 +24,7 @@ cols = data[0]
 data_rows = data[1::]
 df = pd.DataFrame(data_rows, columns = cols)
 
-print df
+print data_rows
 
 print("\n")
 
