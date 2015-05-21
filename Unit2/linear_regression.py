@@ -52,7 +52,11 @@ y = np.matrix(intrate).transpose()
 x1 = np.matrix(fico).transpose()
 x2 = np.matrix(loanamt).transpose()
 
+##Converting column to row
+
 x = np.column_stack([x1,x2])
+
+print x
 
 X = sm.add_constant(x)
 model = sm.OLS(y,X)
