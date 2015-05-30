@@ -73,7 +73,7 @@ for k, v in cities.iteritems():
         query_date += datetime.timedelta(days =1)
 
 #### Testing
-import pandas as pd
+import pandas as pd 
 with con:
     cur.execute("SELECT * FROM daily_temp")
 
