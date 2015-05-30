@@ -36,7 +36,7 @@ with con:
     cur.execute ("CREATE TABLE daily_temp (date_reading REAL, " + ",".join(city_columns) + ")")
 
 end_date = datetime.datetime.date(datetime.datetime.now())
-query_date = end_date - datetime.timedelta(days =5)
+query_date = end_date - datetime.timedelta(days =30)
 
 
 ## insert date values into the table
@@ -61,13 +61,13 @@ print df
 
 ### Now load the database by making calls to API
 for k, v in cities.iteritems():
-    query_date = end_date - datetime.timedelta(days =5)
+    query_date = end_date - datetime.timedelta(days =30)
     while query_date <= end_date:
         url2 = url + "/" + v + "," + query_date.strftime('%Y-%m-%dT%H:%M:%S')
         r = requests.get(url2)
         max_temp = r.json()['daily']['data'][0]['temperatureMax']
         with con:
-            query = 'UPDATE daily_temp SET ' + k + '='+ str(max_temp) + ' WHERE date_reading = ' + str((query_date))
+            query = "UPDATE daily_temp SET " + k + "="+ str(max_temp) + " WHERE date_reading = " + "'" + str(query_date) + "'"
             print query
             cur.execute(query)
         query_date += datetime.timedelta(days =1)
